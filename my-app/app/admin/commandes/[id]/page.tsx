@@ -63,15 +63,15 @@ export default async function DetailCommandePage({ params }: PageProps) {
 
   const historique: HistoriqueRow[] = (historiqueRaw ?? []).map((h) => ({
     ...h,
-    changed_by_nom: h.profiles?.nom && h.profiles?.prenom ? `${h.profiles.prenom} ${h.profiles.nom}` : null,
+    changed_by_nom: h.profiles?.[0]?.nom && h.profiles?.[0]?.prenom ? `${h.profiles[0].prenom} ${h.profiles[0].nom}` : null,
   }));
 
   const mapsLink = commande.gps_lat && commande.gps_lng
     ? `https://www.google.com/maps?q=${encodeURIComponent(`${commande.gps_lat},${commande.gps_lng}`)}`
     : null;
 
-  const livreurNom = commande.profiles?.nom && commande.profiles?.prenom
-    ? `${commande.profiles.prenom} ${commande.profiles.nom}`
+  const livreurNom = commande.profiles?.[0]?.nom && commande.profiles?.[0]?.prenom
+    ? `${commande.profiles[0].prenom} ${commande.profiles[0].nom}`
     : 'Non assigné';
 
   return (
